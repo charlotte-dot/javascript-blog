@@ -25,7 +25,7 @@
 
     /* [DONE] add class 'active' to the clicked link */
 
-    clickedElement.classList.add('active')
+    clickedElement.classList.add('active');
     console.log('clickedElement:', clickedElement);
 
     /* [DONE] remove class 'active' from all articles */
@@ -43,12 +43,12 @@
 
     /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
-    targetArticle = document.querySelector(articleSelector);
+    const targetArticle = document.querySelector(articleSelector);
 
     /* [DONE] add class 'active' to the correct article */
 
-    targetArticle.classList.add('active')
+    targetArticle.classList.add('active');
     console.log('targetArticle:', targetArticle);
-  }
+  };
 
 }
