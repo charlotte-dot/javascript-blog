@@ -51,4 +51,41 @@
     console.log('targetArticle:', targetArticle);
   };
 
+  const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles';
+
+  function generateTitleLinks() {
+
+    /* remove contents of titleList */
+
+    const titleList = optTitleListSelector.querySelector(articleSelector);
+
+    function clearMessages(){
+      titleList.innerHTML = '';
+      
+    }
+    clearMessages();
+
+    /* for each article */
+
+    const articles = optArticleSelector.querySelectorAll();
+    for (let article of articles) {
+      const articleId = clickedElement.getAttribute('href');
+    console.log('Get article!');
+    }
+    /* get the article id */
+
+    /* find the title element */
+
+    /* get the title from the title element */
+
+    /* create HTML of the link */
+
+    /* insert link into titleList */
+
+  }
+
+  generateTitleLinks();
+
 }
