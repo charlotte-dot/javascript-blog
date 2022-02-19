@@ -25,12 +25,12 @@
 
     /* [DONE] add class 'active' to the clicked link */
 
-    clickedElement.classList.add('active');
+    clickedElement.classList.add('active')
     console.log('clickedElement:', clickedElement);
 
     /* [DONE] remove class 'active' from all articles */
 
-    const activeArticles = document.querySelectorAll('.post-content p');
+    const activeArticles = document.querySelectorAll('.post.active');
 
     for (let activeArticle of activeArticles) {
       activeArticle.classList.remove('active');
@@ -43,13 +43,18 @@
 
     /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
-    const targetArticle = document.querySelector(articleSelector);
+    targetArticle = document.querySelector(articleSelector);
 
     /* [DONE] add class 'active' to the correct article */
 
-    targetArticle.classList.add('active');
+    targetArticle.classList.add('active')
     console.log('targetArticle:', targetArticle);
-  };
+  }
+
+  const links = document.querySelectorAll('.titles a');
+  for (const link of links) {
+    link.addEventListener('click', titleClickHandler)
+  }
 
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
@@ -59,20 +64,16 @@
 
     /* remove contents of titleList */
 
-    const titleList = optTitleListSelector.querySelector(articleSelector);
+    const titleList = document.querySelector(optTitleListSelector);
+    titleList.innerHTML = '';
 
-    function clearMessages(){
-      titleList.innerHTML = '';
-      
-    }
-    clearMessages();
 
     /* for each article */
 
-    const articles = optArticleSelector.querySelectorAll();
+    const articles = document.querySelectorAll(optArticleSelector);
     for (let article of articles) {
-      const articleId = clickedElement.getAttribute('href');
-    console.log('Get article!');
+      const articleId = article.getAttribute('id');
+      const articleTitle= optTitleSelector.getAttribute();
     }
     /* get the article id */
 
