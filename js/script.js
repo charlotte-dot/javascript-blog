@@ -73,11 +73,15 @@
     const articles = document.querySelectorAll(optArticleSelector);
     for (let article of articles) {
       const articleId = article.getAttribute('id');
-      const articleTitle= optTitleSelector.getAttribute();
+      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      titleList.innerHTML = titleList.innerHTML + linkHTML;
+      html = html + linkHTML;
     }
-    /* get the article id */
+    titleList.innerHTML = html;
+    /* [DONE]get the article id */
 
-    /* find the title element */
+    /* [DONE]find the title element */
 
     /* get the title from the title element */
 
