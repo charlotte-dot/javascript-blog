@@ -92,26 +92,32 @@
 
   generateTitleLinks();
 
-  function calculateTagsParams();
-  function calculateTagClass(count, params);
+  function calculateTagsParams(tags) {}
+  function calculateTagClass(count, params) {}
 
   function generateTags() {
+
     let html = '';
+
     /* [NEW] create a new variable allTags with an empty object */
     let allTags = {};
+
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
+
     /* START LOOP: for every article: */
     for (let article of articles) {
-      let wrapperTag = article.querySelector(optArticleTagsSelector);
+
+      const articleTagstList = article.querySelector(optArticleTagsSelector);
       const articleTags = article.getAttribute('data-tags');
-      console.log();
       const articleTagsArray = articleTags.split(' ');
-      console.log(articleTagsArray);
+
       for (let tag of articleTagsArray) {
         console.log(tag);
-        const linkHTML2 = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
-        html = html + linkHTML2;
+
+        const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+        html = html + linkHTML;
+      
         /* [NEW] check if this link is NOT already in allTags */
         if (!allTags[tag]) {
           /* [NEW] add tag to allTags object */
@@ -119,7 +125,7 @@
         } else {
           allTags[tag]++;
         }
-        wrapperTag.html();
+        articleTagstList.innerHTML = html;
       }
 
       /* [NEW] find list of tags in right column */
@@ -145,7 +151,7 @@
       const normalizedMax = params.max - params.min;
       const percentage = normalizedCount / normalizedMax;
       const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
-      calculateTagClass (optCloudClassPrefix, classNumber) 
+      calculateTagClass (optCloudClassPrefix, classNumber)
 
       /* [NEW] create variable for all links HTML code */
       let allTagsHTML = '';
@@ -163,6 +169,7 @@
       tagList.innerHTML = allTagsHTML;
       return params;
     }
+  }
 
 
     generateTags();
@@ -227,7 +234,7 @@
       function addClickListenersToTags() {
 
         /* find all links to tags */
-        tagLinks = document.querySelector(tag);
+        tagLinks = document.querySelector(tag) 
 
         /* START LOOP: for each link */  /* add tagClickHandler as event listener for that link */
         for (let tagLink of tagLinks) {
