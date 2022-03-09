@@ -274,4 +274,33 @@
     
         generateAuthors();
 
+        function authorClickHandler(event) {
+          event.preventDefault();
+    
+          const clickedElement = this;
+    
+          const href = clickedElement.getAttribute('href'); 
+    
+          const author = href.replace('#', ''); 
+    
+          const authorLinks = document.querySelectorAll('a.active[href^="#"]');
+    
+          for (let author of authorLinks) {
+            author.classList.remove('active');
+          }
+
+        }
+
+        function addClickListenersToAuthors() {
+
+          const authorLinks = document.querySelectorAll('a[href^="#"]');
+  
+          for (let authorLink of authorLinks) {
+            authorLink.addEventListener('click', authorClickHandler);
+          }
+
+        }
+  
+        addClickListenersToAuthors();
+
 }
