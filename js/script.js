@@ -67,10 +67,10 @@
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
 
-
     /* for each article */
     let html = '';
-    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    const articles = document.querySelectorAll(optArticleSelector + customSelector); //.post[data-author="Marion Berry"]
+ 
     for (let article of articles) {
       const articleId = article.getAttribute('id');
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
@@ -177,27 +177,7 @@
 
 
     generateTags();
-    /* [DONE]find tags wrapper */
 
-    /* [DONE]make html variable with empty string */
-
-    /* [DONE]get tags from data-tags attribute */
-
-    /* [DONE]split tags into array */
-
-    /* [DONE]START LOOP: for each tag */
-
-    /* [DONE]generate HTML of the link */
-
-    /* [DONE]add generated code to html variable */
-
-    /* [DONE]END LOOP: for each tag */
-
-    /* [DONE?]insert HTML of all the links into the tags wrapper */
-
-    /* [DONE]END LOOP: for every article: */
-
-    // eslint-disable-next-line no-inner-declarations
 
     function tagClickHandler(event) {
 
@@ -246,30 +226,39 @@
 
       addClickListenersToTags();
 
-      const optArticleAuthorSelector = '.list .authors'; 
+      const optArticleAuthorSelector = '.post-author'; 
+      const optArticleAuthorsSelector = '.list.authors'; 
 
       function generateAuthors() {
 
-        let html = '';
-        let allAuthors = {};
-    
-        const authors = document.querySelectorAll(optArticleAuthorSelector);
-    
-        for (let author of authors) {
-  
-            const authorName = authors.getAttribute('author-name');
-            const linkHTML = '<li><a href="#">' + authorName + '</a></li>';
-            html = html + linkHTML;
-          
 
-            if (!allAuthors[author]) {
-              allAuthors[author] = 1;
-            } else {
-              allAuthors[author]++;
-            }
+        /* find all articles */
+        const articles = document.querySelectorAll(optArticleSelector);
+
+        const authors = [];
+
+        /* START LOOP: for every article: */
+        for (let article of articles) {
+          const author = article.getAttribute('data-author'); //Marion Berry
+          const authorWrapper = article.querySelector(optArticleAuthorSelector);
+
+          authorWrapper.innerHTML = 'by <a href="#author-' + author + '">' + author + '</a>';
+
+          if(!authors.includes(author)) {
+            authors.push(author);
           }
         }
-          authorName.innerHTML = html;
+
+        const authorsList = document.querySelector(optArticleAuthorsSelector);
+        let html = '';
+
+        for(const author of authors) {
+          const linkHTML = '<li><a href="#author-' + author + '">' + author + '</a></li>';
+          html += linkHTML;
+        }
+
+        authorsList.innerHTML = html;
+
       }
     
         generateAuthors();
@@ -281,19 +270,27 @@
     
           const href = clickedElement.getAttribute('href'); 
     
-          const author = href.replace('#', ''); 
+          const author = href.replace('#author-', ''); //Marion Berry
     
-          const authorLinks = document.querySelectorAll('a.active[href^="#"]');
+          const authorLinks = document.querySelectorAll('a.active[href^="#author-"]');
     
           for (let author of authorLinks) {
             author.classList.remove('active');
           }
 
+          const authorRelatedLinks = document.querySelectorAll('a[href="' + author + '"]');
+    
+          for (let author of authorRelatedLinks) {
+            author.classList.add('active');
+          }
+
+          generateTitleLinks('[data-author="' + author + '"]')
+
         }
 
         function addClickListenersToAuthors() {
 
-          const authorLinks = document.querySelectorAll('a[href^="#"]');
+          const authorLinks = document.querySelectorAll('a[href^="#author-"]');
   
           for (let authorLink of authorLinks) {
             authorLink.addEventListener('click', authorClickHandler);
