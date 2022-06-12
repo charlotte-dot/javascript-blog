@@ -98,7 +98,7 @@ const authorTemplates = {
     /* [DONE]insert link into titleList */
 
     titleList.innerHTML = html
-
+    }
   }
 
   generateTitleLinks();
